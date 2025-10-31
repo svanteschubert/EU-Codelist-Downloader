@@ -1,0 +1,37 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+
+# CSV outputs with timestamps (keep latest.csv files only)
+# Ignore timestamped CSV files
+src/main/resources/phase*/inventory-*.csv
+src/main/resources/phase*/diff-*.csv
+src/main/resources/phase*/downloads-*.csv
+# But track the latest.csv files
+!src/main/resources/phase*/inventory-latest.csv
+!src/main/resources/phase*/diff-latest.csv
+!src/main/resources/phase*/downloads-latest.csv
+
+# Note: registry-links-analysis.txt is tracked in Git
+
+# Temporary release ZIP files in target directory
+target/releases/
+!target/releases/.gitkeep
+

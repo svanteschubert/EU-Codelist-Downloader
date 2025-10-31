@@ -1,0 +1,10 @@
+{
+  "registryUrl" : "https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931",
+  "downloadBasePath" : "src/main/resources/downloaded-files",
+  "checkIntervalSeconds" : 86400,
+  "connectTimeoutMs" : 30000,
+  "readTimeoutMs" : 60000,
+  "downloadDelaySeconds" : 1,
+  "csvOutputBasePath" : "src/main/resources",
+  "writeLatestCopy" : true
+}

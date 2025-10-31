@@ -1,0 +1,243 @@
+Registry Links Analysis - 2025-10-28T19:31:39.199007500
+================================================================================
+
+=== EAS (ELECTRONIC ADDRESS SCHEME) LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2015%20-%20published%20Oct2025.xlsx?version=1&modificationDate=1761226169199&api=v2 | EAS code list – version 15.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2014%20-%20published%20Apr2025.xlsx?version=1&modificationDate=1743779585417&api=v2 | EAS code list – version 14.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2013%20-%20published%20Sept2024.xlsx?version=1&modificationDate=1727768187346&api=v2 | EAS code list – version 13.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2012%20-%20published%20Sept2023.xlsx?version=1&modificationDate=1696608242789&api=v2 | EAS code list – version 12.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2011%20-%20published%20March2023.xlsx?version=1&modificationDate=1679671853318&api=v2 | EAS code list – version 11.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%2010%20-%20published%20Sept2022.xlsx?version=1&modificationDate=1663772430009&api=v2 | EAS code list – version 10.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%209%20-%20published%20March2022.xlsx?version=1&modificationDate=1646394201721&api=v2 | EAS code list – version 9.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%208%20-%20published%20March2021.xlsx?version=1&modificationDate=1639417211047&api=v2 | EAS code list – version 8.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%207%20-%20published.xlsx?version=1&modificationDate=1639417211318&api=v2 | EAS code list - version 7.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%206.xlsx?version=1&modificationDate=1639417211377&api=v2 | EAS code list - version 6.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%205%20-%20published.xlsx?version=1&modificationDate=1639417211464&api=v2 | EAS code list - version 5.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%204%20-%20published.xlsx?version=1&modificationDate=1639417211752&api=v2 | EAS code list - version 4.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%203%20-%20published%202019-06-15%20%284%29.xlsx?version=1&modificationDate=1639417211706&api=v2 | EAS code list - version 3.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%202%20-%20published%2015%2003%202019%20%285%29.xlsx?version=1&modificationDate=1639417211691&api=v2 | EAS code list - version 2.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Electronic%20Address%20Scheme%20Code%20list%20-%20version%201%20-%20November%202018%20%283%29.xlsx?version=1&modificationDate=1639417211675&api=v2 | EAS code list - version 1.0
+
+=== EN16931 CODE LISTS LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Codelists | Code lists
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-TechnicalGuidancedocumentonTaxCodesforeInvoicing | Technical Guidance document (NEW)
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v16%20-%20used%20from%202025-11-15.xlsx?version=1&modificationDate=1761226229087&api=v2 | Full listing of the code lists as used in EN16931 - version 16.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v15%20-%20used%20from%202025-05-15.xlsx?version=1&modificationDate=1743779767614&api=v2 | Full listing of the code lists as used in EN16931 - version 15.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v14%20-%20used%20from%202024-11-15.xlsx?version=1&modificationDate=1727947427578&api=v2 | Full listing of the code lists as used in EN16931 - version 14.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v13%20-%20used%20from%202024-05-15.xlsx?version=2&modificationDate=1712937109681&api=v2 | Full listing of the code lists as used in EN16931 - version 13.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v12%20-%20used%20from%202023-11-15.xlsx?version=1&modificationDate=1696608352344&api=v2 | Full listing of the code lists as used in EN16931 - version 12.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v11%20-%20used%20from%202023-05-15.xlsx?version=1&modificationDate=1679672102082&api=v2 | Full listing of the code lists as used in EN16931 - version 11.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v10%20-%20used%20from%202022-09-21.xlsx?version=1&modificationDate=1663772560850&api=v2 | Full listing of the code lists as used in EN16931 - version 10.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v9%20-%20used%20from%202022-03-04.xlsx?version=1&modificationDate=1646394359265&api=v2 | Full listing of the code lists as used in EN16931 - version 9.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20v8%20-%20used%20from%202021-09-06.xlsx?version=1&modificationDate=1639417211003&api=v2 | Full listing of the code lists as used in EN16931 - version 8.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20-%20genericodes%20-used%20from%202021-05-17.zip?version=1&modificationDate=1639417211205&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/2EN16931%20code%20lists%20values%20-%20used%20from%202021-05-17.xlsx?version=1&modificationDate=1639417211224&api=v2 | Full listing of the code lists as used in EN16931 - version 7.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20-%20genericodes%20-used%20from%202021-05-17.zip?version=1&modificationDate=1639417211205&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20-%20updated%20-%20used%20from%202020-11-15.xlsx?version=1&modificationDate=1639417211272&api=v2 | Full listing of the code lists as used in EN16931 - version 6.0 Updated
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20used%20from%202020-11-15.xlsx?version=1&modificationDate=1639417211300&api=v2 | Full listing of the code lists as used in EN16931 - version 6.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20used%20from%202020-06-30.xlsx?version=1&modificationDate=1639417211361&api=v2 | Full listing of the code lists as used in EN16931 - version 5.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20used%20from%202020-02-14.xlsx?version=1&modificationDate=1639417211426&api=v2 | Full listing of the code lists as used in EN16931 - version 4.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20used%20from%202019-11-15.xlsx?version=1&modificationDate=1639417211632&api=v2 | Full listing of the code lists as used in EN16931 - version 3.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20values%20used%20from%202019-06-15%20%283%29.xlsx?version=1&modificationDate=1639417211613&api=v2 | Full listing of the code lists as used in EN16931 - version 2.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/EN16931%20code%20lists%20%281%29%20%281%29.xlsx?version=1&modificationDate=1639417211596&api=v2 | Full listing of the code lists as used in EN16931 - version 1.0
+
+=== VATEX (VAT EXEMPTION) LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%208.xlsx?version=1&modificationDate=1761226199796&api=v2 | VATEX code list - version 8.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%207.xlsx?version=1&modificationDate=1743779677211&api=v2 | VATEX code list - version 7.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%206%20-draft.xlsx?version=2&modificationDate=1727768630472&api=v2 | VATEX code list - version 6.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%205%20-published.xlsx?version=1&modificationDate=1712920515435&api=v2 | VATEX code list - version 5.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%204%20-published.xlsx?version=1&modificationDate=1639417211288&api=v2 | VATEX code list - version 4.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20version%203%20-published.xlsx?version=1&modificationDate=1639417211445&api=v2 | VATEX code list - version 3.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/VAT%20Exemption%20Reason%20Code%20list%20VATEX%20-%20verion%202%20-published.xlsx?version=1&modificationDate=1639417211661&api=v2 | VATEX code list - version 2.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/Tax%20Exemption%20Reason%20Code%20list%20-%20verion%201%20-%20published%2015%2003%202019%20%283%29.xlsx?version=1&modificationDate=1639417211648&api=v2 | VATEX code list - version 1.0
+
+=== VALIDATION ARTEFACTS (UBL/CII) LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.15.zip?version=1&modificationDate=1761226515610&api=v2 | EN16931 Validation artefacts for CII 16b - version 1.3.15
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.14.zip?version=1&modificationDate=1743780036510&api=v2 | EN16931 Validation artefacts for UBL 2.1 - version 1.3.14
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.14.zip?version=1&modificationDate=1743780050861&api=v2 | EN16931 Validation artefacts for CII 16b - version 1.3.14
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.13.zip?version=1&modificationDate=1728470751124&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.13
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.13.zip?version=1&modificationDate=1728470763669&api=v2 | Validation artefacts for CII 16b - version 1.3.13
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.12.zip?version=1&modificationDate=1712929925314&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.12
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.12.zip?version=1&modificationDate=1712929959908&api=v2 | Validation artefacts for CII 16b - version 1.3.12
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.11.zip?version=1&modificationDate=1696608612864&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.11
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.11.zip?version=1&modificationDate=1696608634008&api=v2 | Validation artefacts for CII 16b - version 1.3.11
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.10.zip?version=1&modificationDate=1681227552843&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.10
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.10.zip?version=1&modificationDate=1681227524047&api=v2 | Validation artefacts for CII 16b - version 1.3.10
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.9.zip?version=1&modificationDate=1666027165892&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.9
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.9.zip?version=1&modificationDate=1666027138348&api=v2 | Validation artefacts for CII 16b - version 1.3.9
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.8.zip?version=1&modificationDate=1649420273634&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.8
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.8.zip?version=1&modificationDate=1649420255107&api=v2 | Validation artefacts for CII 16b - version 1.3.8
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.7.zip?version=1&modificationDate=1649420199180&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.7
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.7.zip?version=1&modificationDate=1649420053903&api=v2 | Validation artefacts for CII 16b - version 1.3.7
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.6.zip?version=1&modificationDate=1639417211066&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.6
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.6.zip?version=1&modificationDate=1639417211088&api=v2 | Validation artefacts for CII 16b - version 1.3.6
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.5.zip?version=1&modificationDate=1639417211119&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.5
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.5.zip?version=1&modificationDate=1639417211102&api=v2 | Validation artefacts for CII 16b - version 1.3.5
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.4.zip?version=1&modificationDate=1639417211162&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.4
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.4.zip?version=1&modificationDate=1639417211147&api=v2 | Validation artefacts for CII 16b - version 1.3.4
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.3.zip?version=1&modificationDate=1639417211240&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.3
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.3.zip?version=1&modificationDate=1639417211256&api=v2 | Validation artefacts for CII 16b - version 1.3.3
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.2.zip?version=1&modificationDate=1639417211345&api=v2 | Validation artefacts for UBL 2.1 - version 1.3.2
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.2.zip?version=1&modificationDate=1639417211330&api=v2 | Validation artefacts for CII 16b - version 1.3.2
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.1.zip?version=1&modificationDate=1639417211407&api=v2 | EN16931 Validation artefacts for UBL 2.1 - version 1.3.1
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.1.zip?version=1&modificationDate=1639417211391&api=v2 | EN16931 Validation artefacts for CII 16b - version 1.3.1
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.3.0.zip?version=1&modificationDate=1639417211579&api=v2 | EN16931 Validation artefacts for UBL 2.1 - version 1.3.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.3.0.zip?version=1&modificationDate=1639417211559&api=v2 | EN16931 Validation artefacts for CII 16b - version 1.3.0
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.2.3%20%281%29.zip?version=1&modificationDate=1639417211538&api=v2 | – EN16931 Validation artefacts for UBL 2.1 - version 1.2.3
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.2.3.zip?version=1&modificationDate=1639417211518&api=v2 | – EN16931 validation artefacts for CII 16b - version 1.2.3
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-ubl-1.2.1.zip?version=1&modificationDate=1639417211496&api=v2 | – EN16931 Validation artefacts for UBL 2.1 - version 1.2.1
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/en16931-cii-1.2.1%20%281%29.zip?version=1&modificationDate=1639417211479&api=v2 | – EN16931 validation artefacts for CII 16b - version 1.2.1
+
+=== GENERICODES LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/digital-genericodes-2025-11-15.zip?version=1&modificationDate=1761226293400&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2025-05-15.zip?version=1&modificationDate=1743779838035&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2024-11-15.zip?version=1&modificationDate=1727768706150&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2024-05-15.zip?version=1&modificationDate=1712920959271&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2023-05-15.zip?version=1&modificationDate=1679672841310&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2022-09-21.zip?version=1&modificationDate=1666027506676&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/cef-genericodes-2022-03-04.zip?version=1&modificationDate=1646397919536&api=v2 | Genericode files
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/digital-genericodes-2025-11-15.zip?version=1&modificationDate=1761226293400&api=v2 | EN16931 Validation artefacts for UBL 2.1 - version 1.3.15
+
+=== GUIDANCE DOCUMENTS LINKS ===
+
+https://ec.europa.eu/digital-building-blocks/sites/download/attachments/467108974/eInvoicing%20technical%20guidance%20document_v1.pdf?version=2&modificationDate=1721117125403&api=v2 | 
+
+=== OTHER DOWNLOADABLE LINKS ===
+
+
+=== NON-DOWNLOADABLE LINKS (Navigation, etc.) ===
+
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/\#title-heading | Skip to main content
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#breadcrumbs | assistive.skiplink.to.breadcrumbs
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#header-menu-bar | assistive.skiplink.to.header.menu
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#navigation | assistive.skiplink.to.action.menu
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#quick-search-query | assistive.skiplink.to.quick.search
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931?reload=true | page refresh
+https://ec.europa.eu/digital-building-blocks/sites/login.action?os_destination=%2Fspaces%2FDIGITAL%2Fpages%2F467108974%2FRegistry%2Bof%2Bsupporting%2Bartefacts%2Bto%2Bimplement%2BEN16931 | Log in
+https://ec.europa.eu/digital-building-blocks/sites/ | 
+https://ec.europa.eu/digital-building-blocks/sites/spacedirectory/view.action | Spaces
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931# | Help
+https://docs.atlassian.com/confluence/docs-92/ | Online Help
+https://ec.europa.eu/digital-building-blocks/sites | Keyboard Shortcuts
+https://ec.europa.eu/digital-building-blocks/sites/configurerssfeed.action | Feed Builder
+https://confluence.atlassian.com/display/DOC/Confluence+9.2+Release+Notes | What’s new
+https://ec.europa.eu/digital-building-blocks/sites/aboutconfluencepage.action | About Confluence
+https://ec.europa.eu/digital-building-blocks/sites/login.action?os_destination=%2Fspaces%2FDIGITAL%2Fpages%2F467108974%2FRegistry%2Bof%2Bsupporting%2Bartefacts%2Bto%2Bimplement%2BEN16931 | Log in
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/447686734/Digital+Building+Blocks+for+Europe | Digital
+https://ec.europa.eu/digital-building-blocks/sites/collector/pages.action?key=DIGITAL | Pages
+https://ec.europa.eu/digital-building-blocks/sites/pages/viewrecentblogposts.action?key=DIGITAL | Blog
+https://ec.europa.eu/digital-building-blocks/sites/collector/pages.action?key=DIGITAL | 
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931# | 
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931# | 
+https://ec.europa.eu/digital-building-blocks/sites/pages/viewpageattachments.action?pageId=467108974 | Attachments (104)
+https://ec.europa.eu/digital-building-blocks/sites/pages/viewpreviousversions.action?pageId=467108974 | Page History
+https://ec.europa.eu/digital-building-blocks/sites/pages/viewinfo.action?pageId=467108974 | Page Information
+https://ec.europa.eu/digital-building-blocks/sites | Resolved comments
+https://ec.europa.eu/digital-building-blocks/sites/pages/listpages-dirview.action?key=DIGITAL&openId=467108974#selectedPageInHierarchy | View in Hierarchy
+https://ec.europa.eu/digital-building-blocks/sites/plugins/viewsource/viewpagesrc.action?pageId=467108974 | View Source
+https://ec.europa.eu/digital-building-blocks/sites/exportword?pageId=467108974 | Export to Word
+https://ec.europa.eu/digital-building-blocks/sites/plugins/userlabeltool/pagebulklabeloperations.action?pageId=467108974 | Page Labels
+https://ec.europa.eu/digital-building-blocks/sites/plugins/userlabeltool/pagebulkattachmentoperations.action?pageId=467108974 | Attachment Labels
+https://ec.europa.eu/digital-building-blocks/sites$generalUtil.getIdBasedPageUrl($page) | Hide Inline Comments
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Digital+Building+Blocks+for+Europe | 
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/About+us | About the program
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/success+stories | Success stories
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/news | News
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Events | Events
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eDelivery | eDelivery
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eID | eID
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing | eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eSignature | eSignature
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/QR+code+Security+Guide | QR Code Security Wizard
+https://ec.europa.eu/digital-building-blocks/sites/display/OOTS | Once-Only Technical System
+https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home | The EU Digital Identity Wallets
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Service+Offering+Canvas | Service Offering Canvas
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/DIGITAL+Monitoring | Digital Building Blocks monitoring
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/CEF+Monitoring+Archive | CEF monitoring (archive)
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/faq | FAQ
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk | Contact a Building Block
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/legal | Legal
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931 | Full Width
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931 | Normal Width
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#login-link | Log in
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931 | Advanced Menu
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#page-metadata-start | Go to start of metadata
+https://ec.europa.eu/digital-building-blocks/sites/display/~n002d0i2 | Warren Vercruysse
+https://ec.europa.eu/digital-building-blocks/sites/display/~nbirggeo | Georg BIRGISSON
+https://ec.europa.eu/digital-building-blocks/sites/pages/diffpagesbyversion.action?pageId=467108974&selectedPageVersions=70&selectedPageVersions=71 | Oct 23, 2025
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing | eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/What+is+eInvoicing | What is eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Types+of+digital+invoices | Types of digital eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/What+are+the+benefits+of+eInvoicing | What are the benefits of eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Get+started+eInvoicing | Get started eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing+HUB | Overview
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Relevant+tools | Relevant tools
+https://ec.europa.eu/digital-building-blocks/sites/x/NIPXGw | Services
+https://ec.europa.eu/digital-building-blocks/sites/x/8oPXGw | Documentation
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing+FAQ | FAQ
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk/portal/8 | Service Desk
+https://ec.europa.eu/digital-building-blocks/sites/display/EINVCOMMUNITY/eInvoicing+User+Community | Community
+https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014L0055&qid=1679672956089 | Directive 2014/55/EU
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Requestforchange | Request for change
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-CEN/TC434EN16931 | CEN/TC 434 EN16931
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-CIUS(CoreinvoiceUsageSpecifications)andExtensions | CIUS (Core invoice Usage Specifications) and Extensions
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Validationartefacts | Validation artefacts
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931#RegistryofsupportingartefactstoimplementEN16931-Regularreleaseschedule | Regular release schedule
+https://ec.europa.eu/digital-building-blocks/sites/x/NYDEBg | eInvoicing User Community
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing+Country+Factsheets+for+each+Member+State+and+other+countries | eInvoicing Country Factsheets
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Obtaining+a+copy+of+the+European+standard+on+eInvoicing | See the guide to obtaining a copy of the European standard on eInvoicing including derivative use
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/European+Standard+and+Specifications | The European standard on eInvoicing technical specifications and reports in 6 parts
+https://standards.cencenelec.eu/dyn/www/f?p=205:32:0::::FSP_ORG_ID,FSP_LANG_ID:1883209,25&cs=18F2559A05E966F8D6BA2CD11622D2977 | Technical Body CEN/TC 434 - Electronic Invoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Code+lists | page about code lists
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk | Service Desk
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk/portal/8 | 
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Code+lists#Codelists-requestchange1 | 
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk/portal/8 | 
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk | Service Desk
+https://ec.europa.eu/digital-building-blocks/sites/x/5xLoAg | Registry of CIUS (Core Invoice Usage Specifications) and Extensions
+https://ec.europa.eu/digital-building-blocks/sites/x/5xLoAg | 
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Validations | validation artefacts.
+https://github.com/ConnectingEurope/eInvoicing-EN16931/issues | maintaining and publishing these validation artefacts
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk | Service Desk
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk/portal/8 | 
+https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/tag/validation-1.3.15 | Release notes - version 1.3.15
+https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/tag/validation-1.3.14.2 | Release notes - version 1.3.14
+https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/tag/validation-1.3.13 | Release notes - version 1.3.13
+https://github.com/ConnectingEurope/eInvoicing-EN16931/releases/tag/validation-1.3.12 | Release notes - version 1.3.12
+https://github.com/ConnectingEurope/eInvoicing-EN16931/issues | GitHub Issue
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108808/eInvoicing+Service+Desk | Contact us
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Digital+Building+Blocks+for+Europe | 
+https://ec.europa.eu/eusurvey/runner/BuildingBlocksBulletin | Subscribe(opens in a new tab)
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/About+us | About the program
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/success+stories | Success Stories
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/news | News
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Events | Events
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eDelivery | eDelivery
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eID | eID
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eInvoicing | eInvoicing
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/eSignature | eSignature
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/QR+code+Security+Guide | QR Code Security Wizard
+https://ec.europa.eu/digital-building-blocks/sites/display/OOTS | Once-Only Technical System
+https://ec.europa.eu/digital-building-blocks/sites/display/EUDIGITALIDENTITYWALLET/EU+Digital+Identity+Wallet+Home | The EU Digital Identity Wallets
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Service+Offering+Canvas | The Service Offering Canvas
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/DIGITAL+Monitoring | Digital Building Blocks monitoring
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/CEF+Monitoring+Archive | CEF monitoring (archive)
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/faq | FAQ
+https://ec.europa.eu/digital-building-blocks/tracker/plugins/servlet/desk | Contact Building Blocks
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/legal | Legal
+https://ec.europa.eu/info/legal-notice_en | Legal notice
+https://ec.europa.eu/info/cookies_en | Cookies
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/legal#building-blocks | Master Service Arrangement
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/Accessibility+Statement | Accessibility Statement
+https://ec.europa.eu/digital-building-blocks/sites/display/DIGITAL/legal#building-blocks | Privacy Statement
+https://commission.europa.eu/legal-notice/vulnerability-disclosure-policy_en | Vulnerability management policy
+https://www.atlassian.com/software/views/opensource-community-additional-license-offer | Evaluate Confluence today
+https://www.atlassian.com/software/confluence | Atlassian Confluence
+https://support.atlassian.com/confluence-server/ | Report a bug
+https://www.atlassian.com/company | Atlassian News
+https://www.atlassian.com/ | Atlassian

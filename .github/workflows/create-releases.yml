@@ -1,0 +1,61 @@
+name: Create Releases
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Owner: ${{ github.repository_owner }}"
+          echo "Actor: ${{ github.actor }}"
+      
+      - name: Check owner
+        run: |
+          if [ "${{ github.actor }}" != "${{ github.repository_owner }}" ]; then
+            echo "Error: Only owner can run"
+            exit 1
+          fi
+      
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      
+      - name: Cache Maven
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      
+      - name: Build
+        run: mvn clean compile
+      
+      - name: Package releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          mvn exec:java -Dexec.mainClass=org.standict.codelist.release.ReleasePackagerMain "-Dexec.args=--create-releases --github-token $GITHUB_TOKEN --owner $OWNER --repo $REPO"
+      
+      - name: Commit checksums
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          if ! git diff --quiet src/main/resources/releases/checksums.json; then
+            git add src/main/resources/releases/checksums.json
+            git commit -m "Update checksums [skip ci]" || true
+            git push || true
+          fi
