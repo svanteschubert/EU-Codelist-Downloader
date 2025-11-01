@@ -363,7 +363,7 @@ public class GitHubReleaseManager {
             
             StringBuilder notes = new StringBuilder();
             notes.append("## Overview\n\n");
-            notes.append("Bundle of **EU Code Lists (EN 16931 artefacts)** explicitly marked with the effective usage date **").append(dateStr).append("**.\n\n");
+            notes.append("Bundle of **EU Code Lists (EN 16931 artefacts)** explicitly marked with the effective usage date **").append(dateStr).append("**.\n\n\n");
             notes.append("Includes:\n\n");
             
             // Collect unique artifact types (categories) from entries (excluding JSON/LICENSE/README)
@@ -413,7 +413,7 @@ public class GitHubReleaseManager {
             // Number the list
             int count = 1;
             for (String type : sortedTypes) {
-                notes.append(count).append(". ").append(type).append("\n\n");
+                notes.append(count).append(". ").append(type).append("\n");
                 count++;
             }
             
@@ -422,14 +422,15 @@ public class GitHubReleaseManager {
                 logger.warn("No artifact types found for effective date {}, entries count: {}", dateStr, filteredEntries.size());
             }
             
-            notes.append("All content originates from the [European Commission registry website](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931).\n\n");
-            notes.append("Packaged under [Apache License 2.0](https://github.com/").append(owner).append("/").append(repo).append("?tab=License-1-ov-file#readme), provided as is without warranty.\n\n");
+            notes.append("\n");
+            notes.append("All content originates from the [European Commission registry website](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931).\n\n\n");
+            notes.append("Packaged under [Apache License 2.0](https://github.com/").append(owner).append("/").append(repo).append("?tab=License-1-ov-file#readme), provided as is without warranty.\n\n\n");
             notes.append("## Package Information\n\n");
-            notes.append("**Uploaded:** ").append(uploadTimeStr).append("\n\n");
-            notes.append("**Package Size:** ").append(String.format("%,d bytes (%.2f MB)", fileSize, fileSizeMB)).append("\n\n");
+            notes.append("**Uploaded:** ").append(uploadTimeStr).append("\n");
+            notes.append("**Package Size:** ").append(String.format("%,d bytes (%.2f MB)", fileSize, fileSizeMB)).append("\n");
             
             if (zipHash != null && !zipHash.isEmpty()) {
-                notes.append("**SHA-256 Hash:** ").append(zipHash).append("\n\n");
+                notes.append("**SHA-256 Hash:** ").append(zipHash).append("\n");
                 notes.append("Use this hash to verify file integrity and detect changes.\n");
             }
             
