@@ -88,37 +88,39 @@ The application uses a **3-phase approach** to efficiently download and track co
 
 ### Phase 2: Comparison
 
-- Compares current registry state with existing downloads from Phase 3
-- Only shows files that do not exist in Phase 3 downloads CSV
+- Compares the current registry with downloaded metadata and files on disk
+- Detects new URLs, changed HTTP metadata, missing files, and mismatched SHA-256 hashes
 - Uses same metadata structure as Phase 1 for consistency
 - Writes diff CSV to `src/main/resources/phase2/diff-latest.csv`
 
 ### Phase 3: Download
 
-- Downloads only files listed in Phase 2 (files not already downloaded)
+- Downloads files that Phase 2 identifies as new, changed, missing, or corrupt
 - Organizes files into category-specific subdirectories
 - Decodes URL-encoded filenames (%20 → spaces)
 - Calculates SHA-256 hash for integrity verification
 - Updates registry JSON (`downloaded-files.json`) with download metadata
 - Includes configurable delays between downloads (1 second default)
-- Appends to download log at `src/main/resources/phase3/downloads-latest.csv`
+- Replaces the per-run log at `src/main/resources/phase3/downloads-latest.csv`
+- Rewrites cumulative download history from the registry, preserving older revisions
+- Rejects unsuccessful HTTP responses and invalid ZIP/XLSX archives before replacing local files
 
 ## Directory Structure
 
 ```bash
 EU-Codelist-Downloader/
 ├── src/main/resources/downloaded-files/
-│   ├── EAS code list/                      # Electronic Address Scheme (15 files)
-│   ├── EN 16931 code list - GeneriCode/    # Genericode ZIP files (8 files)
-│   ├── EN 16931 code list - XLSX/          # EN16931 spreadsheet files (17 files)
+│   ├── EAS code list/                      # Electronic Address Scheme
+│   ├── EN 16931 code list - GeneriCode/    # Genericode ZIP files
+│   ├── EN 16931 code list - XLSX/          # EN16931 spreadsheet files
 │   ├── guidance/                           # Technical guidance (1 file)
-│   ├── validation-artefacts-CII/          # CII validation artefacts (18 files)
-│   ├── validation-artefacts-UBL/          # UBL validation artefacts (17 files)
-│   └── VATEX code list/                   # VAT Exemption Reason codes (7 files)
+│   ├── validation-artefacts-CII/          # CII validation artefacts
+│   ├── validation-artefacts-UBL/          # UBL validation artefacts
+│   └── VATEX code list/                   # VAT Exemption Reason codes
 │
 ├── src/main/resources/
 │   ├── phase1/
-│   │   └── inventory-latest.csv           # Phase 1: File inventory (86 files)
+│   │   └── inventory-latest.csv           # Phase 1: File inventory
 │   ├── phase2/
 │   │   └── diff-latest.csv                # Phase 2: Files to download
 │   ├── phase3/
@@ -129,11 +131,11 @@ EU-Codelist-Downloader/
 └── config.json                             # Application configuration
 ```
 
-**Note**: CSV files are prefixed (`inventory-`, `diff-`, `downloads-`) and timestamped snapshots are created for backup purposes. Only the `*-latest.csv` files are tracked in Git.
+**Note**: CSV files are prefixed (`inventory-`, `diff-`, `downloads-`) and timestamped snapshots are created for backup purposes. Within the phase directories, only the `*-latest.csv` files are tracked in Git; cumulative history and release checksums are also tracked.
 
 ## Features
 
-- **Smart downloading**: Only downloads files not already in `downloaded-files.csv` (cumulative history)
+- **Smart downloading**: Checks the registry, HTTP metadata, local file presence, and hashes; download history never hides a missing or changed file
 - **Rich metadata extraction**: Extracts effective date, publishing date, version, and latest release flag from HTML
 - **Hash verification**: SHA-256 to detect corruptions and changes
 - **Organized storage**: Automatic categorization into category-based directories
@@ -179,6 +181,27 @@ Create or edit `config.json` to customize:
 }
 ```
 
+### Updating existing downloads
+
+The shell scripts can be called from any directory and return a nonzero exit code on failure. Phase 2 also runs Phase 1; Phase 3 runs all three phases.
+
+```bash
+# Refresh the inventory and inspect pending downloads
+./run-phase2.sh
+
+# Download the reviewed candidates without an interactive prompt
+./run-phase3.sh --auto-confirm
+
+# Verify that no further downloads are needed
+./run-phase2.sh
+```
+
+Use `./run-all.sh --auto-confirm` to build, test, and run a complete update in one command. Choose an installed JDK before running scripts. For example, with jenv: `JENV_VERSION=21 ./run-phase2.sh`. Maven and the `java` command should both resolve to a working JDK.
+
+When an attachment is revised under the same filename, its previous bytes are retained under `<category>/revisions/<sha256>/<filename>`. Renamed replacements remain at their original path. Both stay in JSON/CSV history; release packages include only the replacement after it has downloaded successfully. A repeated run should produce an empty Phase 2 diff.
+
+Source publication dates are retained verbatim as parsed dates. Suspicious values produce a warning rather than an invented correction. The September 2026 registry snapshot, for example, lists `26/04/16` for the May 2026 code lists, parsed as `2016-04-26`; its attachment HTTP `Last-Modified` dates also contain upstream 1970 values. Use the explicit effective date for release grouping.
+
 ### Key Parameters
 
 - `downloadBasePath`: Where to save downloaded files (default: `src/main/resources/downloaded-files`)
@@ -204,11 +227,11 @@ Inventory of all files detected on the registry page with extracted metadata.
 
 ### Phase 2 CSV (`phase2/diff-latest.csv`)
 
-Files that need to be downloaded (excluding files already in Phase 3).
+Files that need to be downloaded based on their registry metadata and local contents.
 
 **Columns**: Same structure as Phase 1 (12 columns)
 
-- Shows only files not present in cumulative `downloaded-files.csv`
+- Shows new, changed, missing, or corrupt files, even when their URLs already appear in cumulative history
 - Same sorting as Phase 1
 
 ### Phase 3 CSV Files
@@ -229,8 +252,8 @@ Complete cumulative history of all files ever downloaded.
 
 - Located beside `downloaded-files.json` (same directory)
 - Contains ALL files ever successfully downloaded
-- New downloads appended while maintaining sort order
-- Used by Phase 2 to filter out already-downloaded files
+- Rebuilt from successful downloads in the registry, with refreshed versions and latest flags
+- Contains one row per downloaded URL, including superseded revisions
 - Used to seed `downloaded-files.json` registry when empty
 
 ### Registry JSON (`downloaded-files.json`)
@@ -240,11 +263,12 @@ Complete registry of all downloaded files with full metadata.
 - Located beside `downloaded-files` directory (not inside it)
 - Contains: URL, content length, content type, download timestamp, local path, effective date, publishing date, version, category, hash, file size
 - Sorted identically to CSV files for consistency
-- All fields quoted, URL-decoded filenames
+- URL-decoded filenames survive JSON reloads; missing legacy filenames are recovered from URLs
+- `superseded_by`, when present, identifies the registry URL that replaces an older revision
 
 ## Link Analysis
 
-Use `run-link-extractor.bat` to analyze all links on the registry page:
+Use `./run-link-extractor.sh` (or `run-link-extractor.bat` on Windows) to analyze all links on the registry page:
 
 - Categorizes 88+ downloadable resource links
 - Detects 129+ non-downloadable navigation links
@@ -313,7 +337,7 @@ src/
 
 - **Java 11+**: Programming language
 - **Apache HttpClient 5.2**: HTTP client for fetching files and metadata
-- **JSoup 1.16**: HTML parsing and DOM manipulation
+- **JSoup 1.21**: HTML parsing and DOM manipulation
 - **Jackson**: JSON configuration management
 - **Apache Commons CSV 1.10**: CSV file writing
 - **SLF4J + Logback**: Logging framework
@@ -366,7 +390,7 @@ This will:
 1. Extract all unique effective dates from `downloaded-files.json`
 2. Create one ZIP per date in `target/releases/`
 3. Each ZIP contains:
-   - Filtered `downloaded-files.json` (only entries matching that date)
+   - Filtered `downloaded-files.json` (entries matching that date, excluding successfully superseded revisions)
    - Matching files from `downloaded-files/` directory
    - `LICENSE` file
    - `README-RELEASE.md` documentation

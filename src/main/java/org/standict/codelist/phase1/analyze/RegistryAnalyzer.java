@@ -104,6 +104,9 @@ public class RegistryAnalyzer {
         // Fetch the registry page
         HttpGet request = new HttpGet(config.getRegistryUrl());
         try (CloseableHttpResponse response = httpClient.execute(request)) {
+            if (response.getCode() != 200 || response.getEntity() == null) {
+                throw new IOException("Registry returned HTTP " + response.getCode());
+            }
             Document doc = Jsoup.parse(
                 response.getEntity().getContent(),
                 StandardCharsets.UTF_8.name(),
@@ -121,6 +124,7 @@ public class RegistryAnalyzer {
             
             int downloadableCount = 0;
             int duplicateCount = 0;
+            List<String> failedUrls = new ArrayList<>();
             
             for (Element link : links) {
                 String absoluteUrl = link.absUrl("href");
@@ -145,14 +149,20 @@ public class RegistryAnalyzer {
                                 duplicateCount++;
                                 logger.debug("Skipped duplicate file: {}", absoluteUrl);
                             }
+                        } else {
+                            failedUrls.add(absoluteUrl);
                         }
                     } catch (Exception e) {
                         logger.warn("Failed to analyze file {}: {}", absoluteUrl, e.getMessage());
+                        failedUrls.add(absoluteUrl);
                     }
                 }
             }
             
             logger.info("Found {} downloadable files (code lists, XML, PDFs, etc.), {} duplicates skipped", downloadableCount, duplicateCount);
+            if (filesSet.isEmpty() || !failedUrls.isEmpty()) {
+                throw new IOException("Registry inventory is incomplete; failed links: " + failedUrls);
+            }
             
             // Extract publishing dates from all paragraphs and create a map for propagation
             // Do this while doc is still available
@@ -165,17 +175,100 @@ public class RegistryAnalyzer {
             
             // First ensure effective date and version are filled from filename fallbacks (so XLSX files have versions for propagation)
             ensureReleaseAndVersion(files);
+
+            // Some sections (notably validation artefacts) are not consistently tagged with "(latest version)" in the HTML.
+            // Infer latest validation artefacts deterministically from the highest version number.
+            inferLatestValidationArtefacts(files);
             
             // Propagate publishing dates to files with matching effective dates
             propagatePublishingDates(files, effectiveDateToPublishingDate);
             
             // Then propagate metadata from EN16931 XLSX files to their paired genericode ZIP files
             propagateEn16931Metadata(files);
+            for (FileMetadata file : files) {
+                if (file.getPublishingDate() != null && file.getEffectiveDate() != null &&
+                        file.getPublishingDate().isBefore(file.getEffectiveDate().minusYears(1))) {
+                    logger.warn("Suspicious source publishing date {} for {} (effective {}). Preserving source value.",
+                            file.getPublishingDate(), file.getDecodedFilename(), file.getEffectiveDate());
+                }
+            }
             
             // Write inventory CSV with enhanced format
             writeInventoryCsv(files);
             
             return files;
+        }
+    }
+
+    private void inferLatestValidationArtefacts(List<FileMetadata> files) {
+        String maxUbl = null;
+        String maxCii = null;
+
+        for (FileMetadata f : files) {
+            String name = f.getDecodedFilename();
+            if (name == null) continue;
+            String lower = name.toLowerCase();
+            if (!lower.endsWith(".zip")) continue;
+
+            String v = f.getVersion();
+            if (v == null || v.isBlank()) continue;
+
+            if (lower.startsWith("en16931-ubl-")) {
+                if (maxUbl == null || compareDotSeparatedVersion(v, maxUbl) > 0) {
+                    maxUbl = v;
+                }
+            } else if (lower.startsWith("en16931-cii-")) {
+                if (maxCii == null || compareDotSeparatedVersion(v, maxCii) > 0) {
+                    maxCii = v;
+                }
+            }
+        }
+
+        if (maxUbl == null && maxCii == null) {
+            return;
+        }
+
+        for (FileMetadata f : files) {
+            String name = f.getDecodedFilename();
+            if (name == null) continue;
+            String lower = name.toLowerCase();
+            if (!lower.endsWith(".zip")) continue;
+
+            String v = f.getVersion();
+            if (v == null || v.isBlank()) continue;
+
+            if (maxUbl != null && lower.startsWith("en16931-ubl-")) {
+                f.setLatestRelease(compareDotSeparatedVersion(v, maxUbl) == 0);
+            } else if (maxCii != null && lower.startsWith("en16931-cii-")) {
+                f.setLatestRelease(compareDotSeparatedVersion(v, maxCii) == 0);
+            }
+        }
+    }
+
+    private static int compareDotSeparatedVersion(String a, String b) {
+        if (a == null && b == null) return 0;
+        if (a == null) return -1;
+        if (b == null) return 1;
+
+        String[] pa = a.trim().split("\\.");
+        String[] pb = b.trim().split("\\.");
+        int n = Math.max(pa.length, pb.length);
+
+        for (int i = 0; i < n; i++) {
+            int ai = i < pa.length ? parseVersionPart(pa[i]) : 0;
+            int bi = i < pb.length ? parseVersionPart(pb[i]) : 0;
+            if (ai != bi) {
+                return Integer.compare(ai, bi);
+            }
+        }
+        return 0;
+    }
+
+    private static int parseVersionPart(String s) {
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (Exception e) {
+            return 0;
         }
     }
     
@@ -1421,4 +1514,3 @@ public class RegistryAnalyzer {
         }
     }
 }
-

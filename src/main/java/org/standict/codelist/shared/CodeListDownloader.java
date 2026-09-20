@@ -116,12 +116,7 @@ public class CodeListDownloader {
             logger.info("=".repeat(60));
             logger.info("Phase 3: Downloading {} files...", filesToDownload.size());
             logger.info("=".repeat(60));
-            if (!filesToDownload.isEmpty()) {
-                downloader.downloadFiles(filesToDownload, config.isAutoConfirmDownloads());
-                logger.info("Successfully downloaded {} files", filesToDownload.size());
-            } else {
-                logger.info("No files need to be downloaded - everything is up to date");
-            }
+            downloader.downloadFiles(filesToDownload, config.isAutoConfirmDownloads());
             
             logger.info("=".repeat(60));
             logger.info("Check completed successfully");
@@ -139,7 +134,7 @@ public class CodeListDownloader {
                 );
             }
         } catch (Exception e) {
-            logger.error("Failed to check and download files: {}", e.getMessage(), e);
+            throw new IllegalStateException("Failed to check and download files", e);
         }
     }
     
@@ -170,6 +165,9 @@ public class CodeListDownloader {
         try {
             // Load configuration
             Configuration config = Configuration.load();
+            if (java.util.Arrays.asList(args).contains("--auto-confirm")) {
+                config.setAutoConfirmDownloads(true);
+            }
             
             // Create download directories
             createDirectories(config);
@@ -198,8 +196,8 @@ public class CodeListDownloader {
                 System.exit(0);
             }
             
-        } catch (IOException e) {
-            logger.error("Failed to initialize application: {}", e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error("Application failed: {}", e.getMessage(), e);
             System.exit(1);
         }
     }
@@ -223,4 +221,3 @@ public class CodeListDownloader {
         logger.info("Base directories created successfully");
     }
 }
-

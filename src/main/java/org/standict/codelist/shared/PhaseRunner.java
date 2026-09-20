@@ -40,6 +40,9 @@ public class PhaseRunner {
     public static void main(String[] args) {
         try {
             Configuration config = Configuration.load();
+            if (java.util.Arrays.asList(args).contains("--auto-confirm")) {
+                config.setAutoConfirmDownloads(true);
+            }
             createDirectories(config);
             
             // If arguments provided, run in non-interactive mode
@@ -105,6 +108,7 @@ public class PhaseRunner {
             
         } catch (Exception e) {
             logger.error("Error running phases: {}", e.getMessage(), e);
+            System.exit(1);
         }
     }
     
@@ -133,6 +137,7 @@ public class PhaseRunner {
         
         RegistryAnalyzer analyzer = new RegistryAnalyzer(config);
         FileRegistry registry = new FileRegistry(config.getRegistryFilePath());
+        RegistryCsvImporter.seedRegistryFromPhase3Csv(config, registry);
         FileComparator comparator = new FileComparator(config, registry);
         
         try {
@@ -158,6 +163,7 @@ public class PhaseRunner {
         
         RegistryAnalyzer analyzer = new RegistryAnalyzer(config);
         FileRegistry registry = new FileRegistry(config.getRegistryFilePath());
+        RegistryCsvImporter.seedRegistryFromPhase3Csv(config, registry);
         FileComparator comparator = new FileComparator(config, registry);
         FileDownloader downloader = new FileDownloader(config, registry);
         
@@ -186,6 +192,7 @@ public class PhaseRunner {
         
         RegistryAnalyzer analyzer = new RegistryAnalyzer(config);
         FileRegistry registry = new FileRegistry(config.getRegistryFilePath());
+        RegistryCsvImporter.seedRegistryFromPhase3Csv(config, registry);
         FileComparator comparator = new FileComparator(config, registry);
         FileDownloader downloader = new FileDownloader(config, registry);
         
@@ -244,4 +251,3 @@ public class PhaseRunner {
         Files.createDirectories(Paths.get(config.getPhase3CsvPath()));
     }
 }
-

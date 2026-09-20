@@ -260,7 +260,7 @@ public class RegistryLinkExtractor {
             
         } catch (IOException e) {
             logger.error("Failed to extract links: {}", e.getMessage(), e);
+            System.exit(1);
         }
     }
 }
-

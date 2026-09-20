@@ -17,15 +17,23 @@
 package org.standict.codelist.shared;
 
 import java.net.URLDecoder;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class for determining file categories from filenames and URLs.
  * Provides consistent category detection across all phases.
  */
 public class CategoryDetector {
+
+    private static final Logger logger = LoggerFactory.getLogger(CategoryDetector.class);
+    private static final Set<String> warnedMissingFilenameUrls = ConcurrentHashMap.newKeySet();
     
     /**
      * Determines the category of a file based on its filename and URL context.
@@ -35,6 +43,16 @@ public class CategoryDetector {
      * @return The category name (e.g., "EAS code list", "EN 16931 code list - GeneriCode")
      */
     public static String determineCategoryFromContext(String filename, String url) {
+        String safeUrl = url != null ? url : "";
+
+        if (filename == null) {
+            if (warnedMissingFilenameUrls.add(safeUrl)) {
+                logger.warn("Category detection received null filename for URL: {}", safeUrl);
+            }
+            // Best-effort fallback: derive filename from URL path when possible.
+            filename = extractFilenameFromUrl(safeUrl);
+        }
+
         // Decode filename for analysis
         String decodedFilename;
         try {
@@ -43,8 +61,10 @@ public class CategoryDetector {
             decodedFilename = filename;
         }
         
+        if (decodedFilename == null) {
+            decodedFilename = "";
+        }
         String lowerFilename = decodedFilename.toLowerCase();
-        String lowerUrl = url.toLowerCase();
         
         // EAS code list files
         if (lowerFilename.contains("address") && lowerFilename.contains("scheme") && lowerFilename.endsWith(".xlsx")) {
@@ -87,7 +107,25 @@ public class CategoryDetector {
         }
         
         // Fallback: try to extract from URL
-        return extractCategoryFromUrl(url);
+        return extractCategoryFromUrl(safeUrl);
+    }
+
+    private static String extractFilenameFromUrl(String url) {
+        if (url == null || url.isEmpty()) {
+            return "";
+        }
+        try {
+            String path = new URL(url).getPath();
+            int lastSlash = path.lastIndexOf('/');
+            if (lastSlash >= 0 && lastSlash < path.length() - 1) {
+                String name = path.substring(lastSlash + 1);
+                int questionMark = name.indexOf('?');
+                return questionMark >= 0 ? name.substring(0, questionMark) : name;
+            }
+        } catch (Exception ignored) {
+            // best-effort only
+        }
+        return "";
     }
     
     /**

@@ -30,7 +30,6 @@ import org.standict.codelist.shared.CsvWriterUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
@@ -102,6 +101,7 @@ public class FileDownloader {
     public void downloadFiles(List<FileMetadata> filesToDownload, boolean skipConfirmation) throws IOException, InterruptedException {
         if (filesToDownload.isEmpty()) {
             logger.info("Phase 3: No files to download");
+            registry.saveRegistry();
             List<String[]> emptyData = new ArrayList<>();
             List<FileMetadata> emptyFiles = new ArrayList<>();
             writeDownloadCsv(emptyFiles, emptyData);
@@ -125,6 +125,7 @@ public class FileDownloader {
         
         List<String[]> downloadData = new ArrayList<>();
         List<FileMetadata> downloadedFiles = new ArrayList<>();
+        List<String> failures = new ArrayList<>();
         
         for (int i = 0; i < filesToDownload.size(); i++) {
             FileMetadata metadata = filesToDownload.get(i);
@@ -147,8 +148,7 @@ public class FileDownloader {
                 String decodedFilename = decodeFilename(metadata.getFilename());
                 logger.error("Failed to download file {}: {}", 
                     decodedFilename, e.getMessage());
-                downloadData.add(createDownloadRow(metadata, "FAILED: " + e.getMessage()));
-                downloadedFiles.add(metadata);  // Add even on failure for sorting
+                failures.add(metadata.getUrl());
             }
         }
         
@@ -158,8 +158,10 @@ public class FileDownloader {
         // Write download CSV (with sorting)
         writeDownloadCsv(downloadedFiles, downloadData);
         
-        logger.info("Phase 3 complete. Downloaded {} files", 
-            downloadData.stream().filter(row -> row.length > 16 && row[16].startsWith("SUCCEEDED")).count());
+        logger.info("Phase 3 complete. Downloaded {} files", downloadedFiles.size());
+        if (!failures.isEmpty()) {
+            throw new IOException("Failed to download " + failures.size() + " file(s): " + failures);
+        }
     }
     
     /**
@@ -181,19 +183,33 @@ public class FileDownloader {
         // Download file
         HttpGet request = new HttpGet(metadata.getUrl());
         try (CloseableHttpResponse response = httpClient.execute(request)) {
+            if (response.getCode() != 200) {
+                throw new IOException("HTTP " + response.getCode() + " for " + metadata.getUrl());
+            }
             HttpEntity entity = response.getEntity();
             if (entity == null) {
                 throw new IOException("No content received from: " + metadata.getUrl());
             }
             
-            try (InputStream inputStream = entity.getContent();
-                 FileOutputStream outputStream = new FileOutputStream(targetPath.toFile())) {
-                
-                byte[] buffer = new byte[8192];
-                int bytesRead;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
+            // Finish and verify the response before touching an existing revision.
+            Path temporary = Files.createTempFile(targetPath.getParent(), ".download-", ".tmp");
+            try {
+                try (InputStream inputStream = entity.getContent()) {
+                    Files.copy(inputStream, temporary, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
                 }
+                if (metadata.getContentLength() > 0 && Files.size(temporary) != metadata.getContentLength()) {
+                    throw new IOException("Downloaded size differs from inventory for " + metadata.getUrl());
+                }
+                // ZIP and XLSX downloads must be readable archives, not an HTML error page.
+                if (decodedFilename.toLowerCase(java.util.Locale.ROOT).matches(".*\\.(zip|xlsx)$")) {
+                    try (java.util.zip.ZipFile archive = new java.util.zip.ZipFile(temporary.toFile())) {
+                        if (archive.size() == 0) throw new IOException("Empty archive: " + metadata.getUrl());
+                    }
+                }
+                registry.preserveReplacedFile(targetPath, metadata.getUrl());
+                Files.move(temporary, targetPath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            } finally {
+                Files.deleteIfExists(temporary);
             }
             
             // Calculate hash and update metadata
@@ -461,7 +477,8 @@ public class FileDownloader {
             // Compare by filename (index 7)
             String filename1 = row1.length > 7 ? row1[7] : "";
             String filename2 = row2.length > 7 ? row2[7] : "";
-            return filename1.toLowerCase().compareTo(filename2.toLowerCase());
+            int filenameCompare = filename1.toLowerCase().compareTo(filename2.toLowerCase());
+            return filenameCompare != 0 ? filenameCompare : row1[6].compareTo(row2[6]);
         };
         
         // Write current run only to downloads-latest.csv (replace, not append - this is per-run snapshot)
@@ -469,11 +486,16 @@ public class FileDownloader {
         CsvWriterUtil.writeCsv(DOWNLOAD_HEADERS, sortedData, latestPath);
         logger.info("Wrote {} download records for this run to: {}", sortedData.size(), latestPath);
         
-        // Append to cumulative downloaded-files.csv (contains all files ever downloaded)
+        // Rebuild cumulative history from successful downloads, including reconciled metadata.
         Path cumulativePath = Paths.get(config.getDownloadedFilesCsvPath());
         Files.createDirectories(cumulativePath.getParent());
-        CsvWriterUtil.appendToCsv(DOWNLOAD_HEADERS, sortedData, cumulativePath, csvRowComparator);
-        logger.info("Appended {} download records to cumulative: {}", sortedData.size(), cumulativePath);
+        List<String[]> cumulativeData = new ArrayList<>();
+        for (FileMetadata stored : registry.getAllFiles()) {
+            if (stored.isDownloaded()) cumulativeData.add(createDownloadRow(stored, "SUCCEEDED"));
+        }
+        cumulativeData.sort(csvRowComparator);
+        CsvWriterUtil.writeCsv(DOWNLOAD_HEADERS, cumulativeData, cumulativePath);
+        logger.info("Wrote {} cumulative download records to: {}", cumulativeData.size(), cumulativePath);
         
         // Also create timestamped backup snapshot for current run
         String timestampedFilename = CsvWriterUtil.generateTimestampedFilename("downloads");
@@ -635,4 +657,3 @@ public class FileDownloader {
         }
     }
 }
-

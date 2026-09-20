@@ -5,15 +5,7 @@ This ZIP file contains European e-Invoice code lists and supporting artefacts fo
 ## Contents
 
 - **downloaded-files.json**: Filtered registry containing only entries with the matching effective date
-- **downloaded-files/**: Directory containing all files with the matching effective date, organized by category:
-  - EAS code list: Electronic Address Scheme code lists
-  - EN 16931 code list - GeneriCode: Genericode ZIP files
-  - EN 16931 code list - XLSX: EN16931 spreadsheet files
-  - validation-artefacts-CII: CII validation artefacts
-  - validation-artefacts-UBL: UBL validation artefacts
-  - VATEX code list: VAT Exemption Reason code lists
-  - guidance: Technical guidance documents
-  - Tax Exemption Reason: Legacy tax exemption reason code lists
+- **downloaded-files/**: Artefacts for this effective date, flattened into one directory. Superseded revisions are excluded once their replacement has been successfully downloaded.
 - **LICENSE**: Apache License 2.0
 - **README-RELEASE.md**: This file
 
@@ -21,7 +13,7 @@ This ZIP file contains European e-Invoice code lists and supporting artefacts fo
 
 1. Extract the ZIP file
 2. The `downloaded-files.json` file contains metadata for all files in this package
-3. Files are organized in subdirectories by category under `downloaded-files/`
+3. Files are stored directly under `downloaded-files/`
 4. Refer to individual file metadata in `downloaded-files.json` for version numbers, publishing dates, and other details
 
 ## Source

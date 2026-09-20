@@ -32,7 +32,6 @@ import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.Instant;
 import java.util.Comparator;
@@ -40,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -78,6 +78,12 @@ public class FileRegistry {
             if (Files.exists(registryPath) && Files.size(registryPath) > 0) {
                 String json = new String(Files.readAllBytes(registryPath), StandardCharsets.UTF_8);
                 registeredFiles = objectMapper.readValue(json, new TypeReference<Map<String, FileMetadata>>() {});
+                registeredFiles.forEach((url, file) -> {
+                    file.setUrl(url);
+                    if (file.getLocalPath() != null) {
+                        file.setLocalPath(file.getLocalPath().replace('\\', '/'));
+                    }
+                });
                 long downloadedCount = registeredFiles.values().stream()
                     .filter(FileMetadata::isDownloaded)
                     .count();
@@ -88,8 +94,7 @@ public class FileRegistry {
                 logger.info("No existing registry found at {} - starting fresh", absolutePath);
             }
         } catch (IOException e) {
-            logger.error("Could not load registry from {}: {}", registryFilePath, e.getMessage());
-            registeredFiles = new HashMap<>();
+            throw new java.io.UncheckedIOException("Could not load registry: " + registryFilePath, e);
         }
     }
     
@@ -100,7 +105,7 @@ public class FileRegistry {
         try {
             Path registryPath = Paths.get(registryFilePath);
             Path absolutePath = registryPath.toAbsolutePath();
-            Files.createDirectories(registryPath.getParent());
+            Files.createDirectories(absolutePath.getParent());
             
             // Sort entries by effective_date (oldest first with modification date fallback), category, filename
             Map<String, FileMetadata> sortedFiles = registeredFiles.entrySet().stream()
@@ -144,9 +149,12 @@ public class FileRegistry {
                         }
                         
                         // If categories are equal, compare by filename (alphabetical)
-                        String filename1 = f1.getDecodedFilename().toLowerCase();
-                        String filename2 = f2.getDecodedFilename().toLowerCase();
-                        return filename1.compareTo(filename2);
+                        String filename1 = f1.getDecodedFilename();
+                        String filename2 = f2.getDecodedFilename();
+                        filename1 = (filename1 != null ? filename1 : "").toLowerCase();
+                        filename2 = (filename2 != null ? filename2 : "").toLowerCase();
+                        int filenameCompare = filename1.compareTo(filename2);
+                        return filenameCompare != 0 ? filenameCompare : e1.getKey().compareTo(e2.getKey());
                     }
                 })
                 .collect(Collectors.toMap(
@@ -165,7 +173,7 @@ public class FileRegistry {
             logger.info("Saved registry with {} files ({} downloaded) to {}", 
                 registeredFiles.size(), downloadedCount, absolutePath);
         } catch (IOException e) {
-            logger.error("Could not save registry to {}: {}", registryFilePath, e.getMessage());
+            throw new java.io.UncheckedIOException("Could not save registry: " + registryFilePath, e);
         }
     }
     
@@ -214,6 +222,59 @@ public class FileRegistry {
      */
     public void registerFile(FileMetadata metadata) {
         registeredFiles.put(metadata.getUrl(), metadata);
+    }
+
+    /** Refresh registry metadata without replacing download hashes or HTTP metadata. */
+    public void reconcileInventory(List<FileMetadata> inventory) {
+        Map<String, FileMetadata> currentByUrl = inventory.stream()
+                .collect(Collectors.toMap(FileMetadata::getUrl, f -> f, (first, second) -> first));
+        for (FileMetadata stored : registeredFiles.values()) {
+            FileMetadata current = currentByUrl.get(stored.getUrl());
+            stored.setLatestRelease(current != null && current.isLatestRelease());
+            if (current != null) {
+                stored.setFilename(current.getFilename());
+                stored.setCategory(CategoryDetector.determineCategoryFromContext(current.getFilename(), current.getUrl()));
+                stored.setEffectiveDate(current.getEffectiveDate());
+                stored.setPublishingDate(current.getPublishingDate());
+                stored.setVersion(current.getVersion());
+                stored.setSupersededBy(null);
+            } else {
+                // A renamed file or a new attachment revision can replace the same release.
+                // Only infer replacement when the category, effective date AND version agree.
+                List<FileMetadata> replacements = inventory.stream().filter(candidate ->
+                        stored.getEffectiveDate() != null && stored.getVersion() != null &&
+                        Objects.equals(stored.getEffectiveDate(), candidate.getEffectiveDate()) &&
+                        Objects.equals(stored.getVersion(), candidate.getVersion()) &&
+                        CategoryDetector.determineCategoryFromContext(stored.getFilename(), stored.getUrl())
+                                .equals(CategoryDetector.determineCategoryFromContext(candidate.getFilename(), candidate.getUrl())))
+                        .collect(Collectors.toList());
+                if (replacements.size() == 1) {
+                    stored.setSupersededBy(replacements.get(0).getUrl());
+                }
+            }
+        }
+    }
+
+    /** Preserve downloaded revisions before a new URL replaces their filename on disk. */
+    public void preserveReplacedFile(Path target, String incomingUrl) throws IOException {
+        if (!Files.isRegularFile(target)) return;
+        for (FileMetadata stored : registeredFiles.values()) {
+            if (incomingUrl.equals(stored.getUrl()) || stored.getLocalPath() == null) continue;
+            Path existing = Paths.get(stored.getLocalPath().replace('\\', '/'));
+            if (!existing.toAbsolutePath().normalize().equals(target.toAbsolutePath().normalize())) continue;
+            String hash = calculateFileHash(target.toString());
+            if (hash == null || !hash.equals(stored.getFileHash())) {
+                throw new IOException("Cannot preserve revision with mismatched hash: " + target);
+            }
+            Path archive = target.getParent().resolve("revisions").resolve(hash).resolve(target.getFileName());
+            Files.createDirectories(archive.getParent());
+            if (!Files.exists(archive)) {
+                Files.copy(target, archive);
+            } else if (!hash.equals(calculateFileHash(archive.toString()))) {
+                throw new IOException("Archived revision has mismatched hash: " + archive);
+            }
+            stored.setLocalPath(archive.toString().replace('\\', '/'));
+        }
     }
     
     /**
@@ -292,4 +353,3 @@ public class FileRegistry {
         registeredFiles.remove(url);
     }
 }
-

@@ -62,6 +62,10 @@ public class FileMetadata {
     @JsonProperty("actual_size")
     private long actualFileSize;
     private String localPath;
+
+    @JsonProperty("superseded_by")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String supersededBy;
     
     /**
      * Default constructor for Jackson deserialization.
@@ -112,7 +116,7 @@ public class FileMetadata {
      */
     @JsonIgnore
     public String getFilename() {
-        return filename;
+        return filename != null ? filename : extractFilename(url);
     }
     
     /**
@@ -121,14 +125,29 @@ public class FileMetadata {
     @JsonProperty("filename")
     public String getDecodedFilename() {
         try {
-            return URLDecoder.decode(filename, StandardCharsets.UTF_8.toString());
+            return URLDecoder.decode(getFilename().replace("+", "%2B"), StandardCharsets.UTF_8.toString());
         } catch (Exception e) {
-            return filename;
+            return getFilename();
         }
     }
     
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    /** JSON contains decoded names; restore their raw representation exactly once. */
+    @JsonProperty("filename")
+    public void setDecodedFilename(String filename) {
+        this.filename = filename == null ? null :
+                java.net.URLEncoder.encode(filename, StandardCharsets.UTF_8).replace("+", "%20");
+    }
+
+    public String getSupersededBy() {
+        return supersededBy;
+    }
+
+    public void setSupersededBy(String supersededBy) {
+        this.supersededBy = supersededBy;
     }
     
     public long getContentLength() {
@@ -260,9 +279,9 @@ public class FileMetadata {
     private String detectCategoryFromFilename() {
         String decodedFilename;
         try {
-            decodedFilename = URLDecoder.decode(filename, StandardCharsets.UTF_8.toString());
+            decodedFilename = URLDecoder.decode(getFilename(), StandardCharsets.UTF_8.toString());
         } catch (Exception e) {
-            decodedFilename = filename;
+            decodedFilename = getFilename();
         }
         
         String lowerFilename = decodedFilename.toLowerCase();
@@ -304,4 +323,3 @@ public class FileMetadata {
         return Objects.hash(url);
     }
 }
-

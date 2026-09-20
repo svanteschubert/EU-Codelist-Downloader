@@ -67,12 +67,12 @@ public class ReleaseSanityChecker {
             }
 
             // EN16931 codelist XLSX (category detector maps to en16931-code-lists)
-            if ("en16931-code-lists".equals(category) && name.endsWith(".xlsx")) {
+            if (name.contains("en16931") && name.contains("code lists") && name.endsWith(".xlsx")) {
                 hasEn16931Xlsx = true;
             }
 
             // Genericode (optional SHOULD)
-            if ("genericodes".equals(category) && name.endsWith(".zip")) {
+            if (("genericodes".equals(category) || "en 16931 code list - genericode".equals(category)) && name.endsWith(".zip")) {
                 hasGenericode = true;
             }
         }
@@ -113,5 +113,4 @@ public class ReleaseSanityChecker {
         return value == null ? "" : value.toLowerCase(Locale.ROOT);
     }
 }
-
 

@@ -147,6 +147,11 @@ public class EffectiveDateExtractor {
         rootNode.fields().forEachRemaining(entry -> {
             String url = entry.getKey();
             JsonNode valueNode = entry.getValue();
+            // Keep history in the registry, but package a replacement only after it was downloaded.
+            JsonNode replacement = rootNode.get(valueNode.path("superseded_by").asText(""));
+            if (replacement != null && replacement.path("downloaded").asBoolean(false)) {
+                return;
+            }
             JsonNode effectiveDateNode = valueNode.get("effective_date");
             
             LocalDate entryDate = null;
@@ -345,4 +350,3 @@ public class EffectiveDateExtractor {
         return filtered;
     }
 }
-

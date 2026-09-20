@@ -112,12 +112,16 @@ public class DeterministicZipper {
                 }
                 
                 if (Files.exists(localFile)) {
+                    if (metadata.getFileHash() != null && !metadata.getFileHash().equals(
+                            org.standict.codelist.shared.FileRegistry.calculateFileHash(localFile.toString()))) {
+                        throw new IOException("File hash differs from release registry: " + localFile);
+                    }
                     // Flatten structure: use just filename under downloaded-files/ (no subdirectories)
                     String filename = localFile.getFileName().toString();
                     String zipEntryName = "downloaded-files/" + filename;
                     entries.add(new ZipEntryInfo(zipEntryName, localFile));
                 } else {
-                    logger.warn("File not found: {}", localFile);
+                    throw new IOException("Release file not found: " + localFile);
                 }
             }
         }
@@ -170,4 +174,3 @@ public class DeterministicZipper {
         }
     }
 }
-

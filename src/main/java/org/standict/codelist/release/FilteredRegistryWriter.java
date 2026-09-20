@@ -74,6 +74,7 @@ public class FilteredRegistryWriter {
             modified.setEffectiveDate(original.getEffectiveDate());
             modified.setPublishingDate(original.getPublishingDate());
             modified.setVersion(original.getVersion());
+            modified.setSupersededBy(original.getSupersededBy());
             modified.setLatestRelease(original.isLatestRelease());
             modified.setDownloaded(original.isDownloaded());
             modified.setDownloadTime(original.getDownloadTime());
@@ -178,4 +179,3 @@ public class FilteredRegistryWriter {
         }
     }
 }
-

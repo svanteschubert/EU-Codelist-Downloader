@@ -95,6 +95,7 @@ public final class RegistryCsvImporter {
                     FileMetadata meta = new FileMetadata(url);
                     // filename
                     safeSet(() -> meta.setFilename(record.get(COL_FILENAME)));
+                    safeSet(() -> meta.setCategory(record.get(COL_CATEGORY)));
                     // sizes and types
                     safeSet(() -> meta.setContentLength(parseLong(record.get(COL_CONTENT_LENGTH))));
                     safeSet(() -> meta.setContentType(record.get(COL_CONTENT_TYPE)));
@@ -111,7 +112,7 @@ public final class RegistryCsvImporter {
                     safeSet(() -> meta.setFileHash(record.get(COL_HASH)));
 
                     // Try to locate file on disk to set localPath
-                    Path found = findDownloadedFile(config, record.get(COL_FILENAME));
+                    Path found = findDownloadedFile(config, meta.getDecodedFilename(), meta.getFileHash());
                     if (found != null) {
                         meta.setLocalPath(found.toString());
                     }
@@ -150,7 +151,7 @@ public final class RegistryCsvImporter {
         try { return (s == null || s.isEmpty()) ? null : LocalDateTime.parse(s, DATETIME_YYYY_MM_DD_HH_MM_SS); } catch (Exception e) { return null; }
     }
 
-    private static Path findDownloadedFile(Configuration config, String filename) {
+    private static Path findDownloadedFile(Configuration config, String filename, String hash) {
         if (filename == null || filename.isEmpty()) {
             return null;
         }
@@ -164,6 +165,7 @@ public final class RegistryCsvImporter {
                 return stream
                     .filter(Files::isRegularFile)
                     .filter(p -> p.getFileName().toString().equals(filename))
+                    .filter(p -> hash != null && hash.equals(FileRegistry.calculateFileHash(p.toString())))
                     .findFirst()
                     .orElse(null);
             }
@@ -172,5 +174,4 @@ public final class RegistryCsvImporter {
         }
     }
 }
-
 

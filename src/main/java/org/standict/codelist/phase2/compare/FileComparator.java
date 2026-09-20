@@ -35,16 +35,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.csv.QuoteMode;
 
 /**
  * Phase 2: Compares current registry state with existing downloads.
@@ -93,8 +87,8 @@ public class FileComparator {
             boolean fileExistsOnDisk = false;
             String localPathToCheck = null;
             if (existing != null && existing.getLocalPath() != null) {
-                localPathToCheck = existing.getLocalPath();
-                fileExistsOnDisk = Files.exists(Paths.get(localPathToCheck));
+                localPathToCheck = existing.getLocalPath().replace('\\', '/');
+                fileExistsOnDisk = Files.isRegularFile(Paths.get(localPathToCheck));
             } else {
                 // Try to determine expected path based on category
                 String category = CategoryDetector.determineCategoryFromContext(current.getFilename(), current.getUrl());
@@ -104,45 +98,31 @@ public class FileComparator {
             }
             
             // Determine if file needs download
+            boolean needsDownload = false;
             if (existing == null || !existing.isDownloaded() || !fileExistsOnDisk) {
                 // NEW file (not in registry, not downloaded, or file missing from disk)
-                filesToDownload.add(current);
+                needsDownload = true;
                 logger.info("NEW file: {} - File not in registry or missing from disk", decodedFilename);
-            } else if (hasChanged(current, existing)) {
+            } else if (hasChanged(current, existing) ||
+                    (existing.getFileHash() != null && !existing.getFileHash().equals(
+                            FileRegistry.calculateFileHash(localPathToCheck)))) {
                 // CHANGED file
-                filesToDownload.add(current);
+                needsDownload = true;
                 logger.info("CHANGED file: {} - {}", decodedFilename, getChangeReason(current, existing));
             } else {
                 // UNCHANGED file
                 logger.debug("UNCHANGED file: {} (exists at: {})", decodedFilename, localPathToCheck);
             }
             
-            String[] row = createDiffRow(current, localPathToCheck, fileExistsOnDisk);
-            diffEntries.add(new DiffEntry(current, row));
-        }
-        
-        // Filter out rows that already exist in Phase 3 CSV (already downloaded)
-        Set<String> downloadedUrls = loadDownloadedUrlsFromPhase3();
-        List<DiffEntry> filteredEntries = new ArrayList<>();
-        for (DiffEntry entry : diffEntries) {
-            if (!downloadedUrls.contains(entry.metadata.getUrl())) {
-                filteredEntries.add(entry);
-            } else {
-                logger.debug("Skipping {} - already in Phase 3 CSV", entry.metadata.getFilename());
+            if (needsDownload) {
+                filesToDownload.add(current);
+                diffEntries.add(new DiffEntry(current, createDiffRow(current, localPathToCheck, fileExistsOnDisk)));
             }
         }
-        
-        // Write diff CSV (with sorting) - only rows that need download
-        writeDiffCsv(filteredEntries);
-        
-        logger.info("Phase 2 complete. {} files need download ({} filtered from Phase 3 CSV)", 
-            filteredEntries.size(), diffEntries.size() - filteredEntries.size());
-        
-        // Update filesToDownload to match filtered entries
-        filesToDownload.clear();
-        for (DiffEntry entry : filteredEntries) {
-            filesToDownload.add(entry.metadata);
-        }
+        // History is not evidence that the current bytes are still present and unchanged.
+        registry.reconcileInventory(currentFiles);
+        writeDiffCsv(diffEntries);
+        logger.info("Phase 2 complete. {} files need download", filesToDownload.size());
         
         return filesToDownload;
     }
@@ -392,50 +372,4 @@ public class FileComparator {
         }
     }
     
-    /**
-     * Loads URLs from downloaded-files.csv (cumulative history) to filter out already downloaded files.
-     * Returns a set of URLs that are already in the cumulative CSV.
-     */
-    private Set<String> loadDownloadedUrlsFromPhase3() {
-        Set<String> downloadedUrls = new HashSet<>();
-        // Use cumulative downloaded-files.csv instead of downloads-latest.csv
-        Path cumulativePath = Paths.get(config.getDownloadedFilesCsvPath());
-        
-        if (!Files.exists(cumulativePath)) {
-            logger.debug("Cumulative downloaded-files.csv not found at {} - will include all files in Phase 2", cumulativePath);
-            return downloadedUrls;
-        }
-        
-        try {
-            // Read cumulative CSV - URL column is named "url"
-            try (CSVParser parser = CSVParser.parse(cumulativePath, StandardCharsets.UTF_8, 
-                    CSVFormat.DEFAULT.builder()
-                        .setHeader()
-                        .setSkipHeaderRecord(true)
-                        .setQuoteMode(QuoteMode.ALL)
-                        .build())) {
-                
-                for (CSVRecord record : parser) {
-                    // Get URL from "url" column
-                    try {
-                        String url = record.get("url");
-                        if (url != null && !url.isEmpty()) {
-                            downloadedUrls.add(url);
-                        }
-                    } catch (IllegalArgumentException e) {
-                        // Column doesn't exist, skip
-                        logger.debug("URL column not found in downloaded-files.csv record: {}", e.getMessage());
-                    }
-                }
-            }
-            logger.info("Loaded {} URLs from cumulative downloaded-files.csv to filter Phase 2 results", downloadedUrls.size());
-        } catch (IOException e) {
-            logger.warn("Could not read cumulative downloaded-files.csv from {}: {} - will include all files in Phase 2", 
-                cumulativePath, e.getMessage());
-        }
-        
-        return downloadedUrls;
-    }
-    
 }
-
