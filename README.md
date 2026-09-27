@@ -38,7 +38,7 @@ changing `FileMetadata` or its serialization.
 
 ### Prerequisites
 
-- Java 11 or higher
+- Java 25 (the build pins jenv to it through `.java-version`)
 - Maven 3.6 or higher
 
 ### Installation
@@ -217,7 +217,7 @@ The shell scripts can be called from any directory and return a nonzero exit cod
 ./run-phase2.sh
 ```
 
-Use `./run-all.sh --auto-confirm` to build, test, and run a complete update in one command. Choose an installed JDK before running scripts. For example, with jenv: `JENV_VERSION=21 ./run-phase2.sh`. Maven and the `java` command should both resolve to a working JDK.
+Use `./run-all.sh --auto-confirm` to build, test, and run a complete update in one command. Choose an installed JDK before running scripts. The repository's `.java-version` pins jenv to Java 25; to override it once, use `JENV_VERSION=25 ./run-phase2.sh`. Maven and the `java` command should both resolve to a working JDK.
 
 When an attachment is revised under the same filename, its previous bytes are retained under `<category>/revisions/<sha256>/<filename>`. Renamed replacements remain at their original path. Both stay in JSON/CSV history; release packages include only the replacement after it has downloaded successfully. A repeated run should produce an empty Phase 2 diff.
 
@@ -356,7 +356,7 @@ src/
 
 ## Technologies Used
 
-- **Java 11+**: Programming language
+- **Java 25**: Programming language
 - **Apache HttpClient 5.2**: HTTP client for fetching files and metadata
 - **JSoup 1.21**: HTML parsing and DOM manipulation
 - **Jackson**: JSON configuration management
