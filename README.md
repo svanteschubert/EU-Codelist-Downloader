@@ -13,6 +13,27 @@ This repository provides an automated solution to download and organize European
 - **Genericodes** for cross-border transactions
 - **Technical guidance** documents
 
+## Separation of responsibilities
+
+This repository acquires and archives the official artefacts: bytes and provenance.
+It scrapes the registry page, records what each file is and where it came from,
+downloads what changed, and packages releases by effective date.
+
+It does **not** interpret the contents of an artefact.
+[`EU-Codelist-Normalizer`](../EU-Codelist-Normalizer) reads this repository's
+registry and files and normalizes them into a diffable form; a third stage
+reports on the differences. They only ever read from here; nothing downstream
+writes back into this repository.
+
+`src/main/resources/downloaded-files.json` is therefore not an internal file but
+the **contract** with those consumers. They depend on the field names `url`,
+`category`, `downloaded`, `version`, `effective_date`, `actual_hash`,
+`localPath`, `filename` and `superseded_by`, and on their shapes — an
+`effective_date` written as `[year, month, day]`, a relative `localPath`, a
+64-character lowercase `actual_hash`. The normalizer's `RegistryContractTest`
+pins them and fails if one is renamed here, so run that sibling's tests after
+changing `FileMetadata` or its serialization.
+
 ## Quick Start
 
 ### Prerequisites

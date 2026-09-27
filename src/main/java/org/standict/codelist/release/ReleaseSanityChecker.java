@@ -33,6 +33,16 @@ import java.util.Map;
  *  - SHOULD: One validation artefact for UBL (.zip) and one for CII (.zip)
  *  - SHOULD: One EN16931 codelist as XLSX (.xlsx)
  *  - SHOULD: One Genericode package (.zip)
+ *
+ * <p><strong>Scope: completeness of a delivery, not agreement between its files.</strong> This is the gate in front of
+ * packaging and publishing a release, so it must run here and must stay cheap: it judges a delivery by which
+ * categories of file are present, from the registry metadata alone, without opening an archive.
+ *
+ * <p>Whether those files agree with each other — the same code list shipped twice with different codes, a validation
+ * artefact that does not enforce the values the Genericode package publishes, codes that contradict the effective date
+ * — needs the normalized contents of the archives and therefore belongs to the reporting stage built on
+ * {@code EU-Codelist-Normalizer}. The two checks overlap in wording but not in evidence; passing this one says nothing
+ * about the other, and neither replaces the other.
  */
 public class ReleaseSanityChecker {
     private static final Logger logger = LoggerFactory.getLogger(ReleaseSanityChecker.class);
