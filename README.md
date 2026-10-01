@@ -1,5 +1,10 @@
 # EU-Codelist-Downloader
 
+> **Unofficial showcase.** The authoritative code lists and supporting artefacts are
+> those the European Commission publishes in its
+> [Registry of supporting artefacts to implement EN16931](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931).
+> Where this repository or its releases differ, the Registry prevails.
+
 A Java application for automatically downloading and organizing European e-Invoice code lists from the European Commission's Digital Building Blocks registry. This application helps members of the European e-Invoice Technical Advisory Group maintain up-to-date local copies of all official code lists and supporting artefacts.
 
 ## Purpose
@@ -20,10 +25,10 @@ It scrapes the registry page, records what each file is and where it came from,
 downloads what changed, and packages releases by effective date.
 
 It does **not** interpret the contents of an artefact.
-[`EU-Codelist-Normalizer`](../EU-Codelist-Normalizer) reads this repository's
-registry and files and normalizes them into a diffable form; a third stage
-reports on the differences. They only ever read from here; nothing downstream
-writes back into this repository.
+[`EU-Codelist-Normalizer`](https://github.com/svanteschubert/EU-Codelist-Normalizer)
+reads this repository's registry and files, normalizes them into a diffable form and
+reports on the differences, in its own repository. It only ever reads from here;
+nothing downstream writes back into this repository.
 
 `src/main/resources/downloaded-files.json` is therefore not an internal file but
 the **contract** with those consumers. They depend on the field names `url`,
@@ -166,7 +171,7 @@ EU-Codelist-Downloader/
 - **Configurable delays**: Human-like download behavior
 - **Registry tracking**: JSON registry (`downloaded-files.json`) and cumulative CSV (`downloaded-files.csv`) maintain complete download history
 - **Metadata propagation**: EN16931 XLSX metadata automatically propagated to paired GeneriCode ZIP files
-- **Apache 2.0 licensed**: Open source
+- **AGPL-3.0-or-later licensed**: Open source
 
 ## Script Files
 
@@ -367,7 +372,10 @@ src/
 
 ## License
 
-This project is licensed under Apache License 2.0. See [LICENSE](LICENSE) for details.
+The software and documentation of this repository are licensed under the GNU Affero
+General Public License, version 3 or later (`AGPL-3.0-or-later`); see [LICENSE](LICENSE)
+and [NOTICE](NOTICE). The license does not apply to the files downloaded from the
+European Commission; they remain subject to the Commission's terms.
 
 ## Contributing
 

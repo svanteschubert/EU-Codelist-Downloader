@@ -1,11 +1,11 @@
 Code List EU - European e-Invoice Code Lists
 
-Copyright 2025 Svante Schubert
+Copyright 2025-2026 Svante Schubert
 
-This product includes software developed by members of the European e-Invoice 
+This product includes software developed by members of the European e-Invoice
 Technical Advisory Group.
 
-This project downloads and organizes European EN16931 code lists and supporting 
+This project downloads and organizes European EN16931 code lists and supporting
 artefacts, including:
 - Electronic Address Schemes (EAS)
 - VAT Exemption Reason Codes (VATEX)
@@ -13,15 +13,13 @@ artefacts, including:
 - Genericodes for cross-border transactions
 - Technical guidance documents
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+This is an unofficial showcase. The authoritative code lists and supporting
+artefacts are those the European Commission publishes in its Registry of
+supporting artefacts to implement EN16931:
+https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/467108974/Registry+of+supporting+artefacts+to+implement+EN16931
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
+The software and documentation of this repository are licensed under the GNU
+Affero General Public License, version 3 or (at your option) any later version
+(SPDX: AGPL-3.0-or-later); see LICENSE. The license does not apply to the files
+downloaded from the European Commission; they remain subject to the Commission's
+terms.
